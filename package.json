@@ -1,0 +1,42 @@
+{
+  "dependencies": {
+    "aws-sdk": "^2.1692.0",
+    "express": "^4.21.2",
+    "multer": "^1.4.5-lts.1",
+    "pdf-parse": "^1.1.1"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/jest": "^29.5.14",
+    "@types/multer": "^1.4.12",
+    "@types/node": "^22.13.5",
+    "@types/pdf-parse": "^1.1.4",
+    "dotenv": "^16.4.7",
+    "jest": "^29.7.0",
+    "supertest": "^7.0.0",
+    "ts-jest": "^29.2.6",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
+  },
+  "name": "invoice-pdf",
+  "version": "1.0.0",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thaissacarvalho/invoice-pdf.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thaissacarvalho/invoice-pdf/issues"
+  },
+  "homepage": "https://github.com/thaissacarvalho/invoice-pdf#readme",
+  "description": ""
+}
