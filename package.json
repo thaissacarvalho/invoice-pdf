@@ -1,14 +1,14 @@
 {
   "name": "invoice-pdf",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "app.ts",
   "directories": {
     "test": "tests"
   },
   "scripts": {
-    "start": "node dist/index.js",
+    "start": "node dist/server.js",
     "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
-    "build": "tsc",
+    "build": "rm -rf dist/ && tsc && npm run start",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
@@ -27,10 +27,17 @@
   "homepage": "https://github.com/thaissacarvalho/invoice-pdf#readme",
   "description": "",
   "dependencies": {
-    "aws-sdk": "^2.1692.0",
+    "@aws-sdk/client-dynamodb": "^3.751.0",
+    "@aws-sdk/client-lambda": "^3.750.0",
+    "@aws-sdk/client-s3": "^3.750.0",
+    "@aws-sdk/client-sqs": "^3.750.0",
+    "@types/aws-lambda": "^8.10.147",
+    "body-parser": "^1.20.3",
+    "ejs": "^3.1.10",
     "express": "^4.21.2",
     "multer": "^1.4.5-lts.1",
-    "pdf-parse": "^1.1.1"
+    "pdf-parse": "^1.1.1",
+    "serverless-http": "^3.2.0"
   },
   "devDependencies": {
     "@types/express": "^5.0.0",
