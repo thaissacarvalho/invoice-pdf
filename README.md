@@ -89,7 +89,7 @@ Esta é uma API para processamento de faturas em PDF. A aplicação extrai infor
 ## Arquitetura do Sistema
 A API foi projetada para ser escalável e resiliente, utilizando serviços gerenciados da AWS:
 
-![Diagrama de Arquitetura](caminho/para/imagem.png)
+![Diagrama de Arquitetura](./src/assets/diagramaVisualAWS.drawio.png)
 
 ### Componentes:
 1. **API Gateway e Express** → Gerencia as requisições HTTP.

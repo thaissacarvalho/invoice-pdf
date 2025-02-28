@@ -1,0 +1,43 @@
+Plano Descritivo para Garantir Escalabilidade e Tolerância a Falhas
+
+=> Escalabilidade
+
+API Gateway e Express com Node.js/Typescript:
+Ao construir os endpoints com Express e Typescript, podemos implementar uma camada de API robusta. Quando implantada na AWS, a aplicação pode ser containerizada (ECS/EKS) ou integrada com API Gateway para suportar altos volumes de requisições. Esses serviços são escaláveis horizontalmente e ajustam-se automaticamente à demanda.
+
+AWS S3 e SQS:
+O S3 oferece escalabilidade nativa para armazenar grandes volumes de PDFs sem preocupações com capacidade. O SQS, por sua vez, permite desacoplar o fluxo de ingestão do processamento, possibilitando que a quantidade de mensagens na fila seja processada conforme a carga, suportando picos de até 1.000 faturas/hora.
+
+AWS Lambda:
+As funções Lambda são configuradas para autoescalar, permitindo que múltiplas instâncias sejam invocadas em paralelo para processar os PDFs. Essa abordagem serverless elimina a necessidade de provisionamento manual de infraestrutura para lidar com aumentos repentinos na carga.
+
+AWS DynamoDB:
+Como um serviço NoSQL gerenciado, o DynamoDB escala horizontalmente conforme o volume de dados e acessos, garantindo baixa latência mesmo sob cargas elevadas.
+
+=> Tolerância a Falhas
+
+Desacoplamento via AWS SQS:
+A utilização de uma fila de mensagens permite que, em caso de falha no processamento de algum PDF, a mensagem possa ser reprocessada ou encaminhada para uma dead-letter queue para posterior análise. Isso evita que erros em uma etapa afetem o fluxo completo.
+
+Redundância e Multi-AZ:
+Os serviços AWS (S3, SQS, Lambda, DynamoDB) são distribuídos em múltiplas zonas de disponibilidade (AZ), assegurando que, mesmo em caso de falha em uma região, o sistema continue operando sem perda de dados.
+
+Monitoramento e Logging Centralizado:
+Com ferramentas como AWS CloudWatch, é possível monitorar métricas, logs e definir alarmes que identificam falhas ou comportamentos anômalos, possibilitando uma resposta rápida a incidentes.
+
+Mecanismos de Retry e Circuit Breakers:
+No processamento realizado pelas funções Lambda, a implementação de retries automáticos e circuit breakers (caso aplicável) contribui para a resiliência, tratando falhas transitórias e evitando sobrecarga do sistema.
+
+=> Justificativa das Escolhas de Design
+
+Escolha do Node.js, Express e Typescript:
+Essa stack permite um desenvolvimento rápido e seguro, onde o uso de Typescript agrega tipagem estática que reduz erros em tempo de desenvolvimento. Express é leve e flexível, facilitando a criação de APIs RESTful que se integram perfeitamente com outros serviços AWS.
+
+Utilização do Ecossistema AWS:
+A AWS oferece serviços gerenciados e escaláveis que minimizam a sobrecarga operacional. S3, SQS, Lambda e DynamoDB garantem alta disponibilidade, performance e tolerância a falhas, permitindo que o sistema lide com picos de demanda e falhas sem impacto significativo no serviço.
+
+Desacoplamento e Assincronismo:
+Ao separar as etapas de upload, processamento e armazenamento através de filas e funções serverless, o sistema se torna mais resiliente. Se uma parte falhar, as outras continuam operando, e a recuperação pode ser feita de forma isolada.
+
+Foco na Escalabilidade e Resiliência:
+Cada componente foi escolhido para suportar crescimento horizontal e tratar falhas de maneira autônoma, permitindo que o sistema seja robusto e adaptável mesmo em cenários de alta carga e demandas variáveis.
